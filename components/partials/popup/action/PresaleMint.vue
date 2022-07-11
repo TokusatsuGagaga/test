@@ -57,9 +57,9 @@
 <script setup lang="ts">
 import IconService from 'icon-sdk-js'
 import { storeToRefs } from 'pinia'
-import { useLedgerStore } from '@/stores/ledger'
+// import { useLedgerStore } from '@/stores/ledger'
 import { useUserStore } from '@/stores/user'
-import type { TxResult } from '@/composables/useScoreService'
+// import type { TxResult } from '@/composables/useScoreService'
 
 const { IconConverter, IconBuilder, IconAmount } = IconService
 const { CallTransactionBuilder } = IconBuilder
@@ -93,11 +93,11 @@ const props = defineProps<Props>()
 const { iconNetwork, scoreAddress } = useRuntimeConfig()
 
 const { emit, bus, events } = useEventsBus()
-const { getBlockData, getTxResult } = useScoreService()
+// const { getBlockData, getTxResult } = useScoreService()
 const { notify } = useNotificationToast()
 const { ICONEX_HANDLE_CANCEL } = useIconexListener()
 
-const { dipsatchLedger } = useLedgerStore()
+// const { dipsatchLedger } = useLedgerStore()
 const { address, wallet } = storeToRefs(useUserStore())
 
 const nid = iconNetwork === 'testnet' ? '83' : '1'
@@ -142,19 +142,19 @@ const getPresaleMintQuery = async (): Promise<MintQuery> => {
 
 const makePresaleMint = async (hash: string): Promise<{ block: unknown, tx: { txHash: string } }> => new Promise((resolve, reject) => {
   try {
-    const interval = setInterval(async () => {
-      const tx = await getTxResult(hash)
-      if (tx.status === 1) {
-        clearInterval(interval)
+    // const interval = setInterval(async () => {
+    //   const tx = await getTxResult(hash)
+    //   if (tx.status === 1) {
+    //     clearInterval(interval)
 
-        const block = await getBlockData(tx.blockHash)
+    //     const block = await getBlockData(tx.blockHash)
 
-        resolve({ block, tx })
-      } else {
-        reject(tx.failure)
-        clearInterval(interval)
-      }
-    }, 2000)
+    //     resolve({ block, tx })
+    //   } else {
+    //     reject(tx.failure)
+    //     clearInterval(interval)
+    //   }
+    // }, 2000)
   } catch (error) {
     reject(error)
   }
@@ -246,12 +246,12 @@ const TX_ROUTER = async ({ type, payload }: { type: string, payload: MintQuery }
     }))
   } else if (wallet.value === 'ledger') {
     try {
-      const result = await dipsatchLedger({ type, payload })
-      if (type === 'REQUEST_JSON-RPC') {
-        HANDLE_RPC({ payload: result })
-      } else {
-        HANDLE_SIGN({ payload: result })
-      }
+      // const result = await dipsatchLedger({ type, payload })
+      // if (type === 'REQUEST_JSON-RPC') {
+      //   HANDLE_RPC({ payload: result })
+      // } else {
+      //   HANDLE_SIGN({ payload: result })
+      // }
     } catch (error) {
       HANDLE_RPC({ error: error.message })
 
