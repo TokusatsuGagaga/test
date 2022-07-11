@@ -17,4 +17,29 @@ export default defineNuxtConfig({
       ],
     },
   },
+  css: [
+    '~/assets/styles/tailwind.css',
+    '~/assets/styles/fonts.css',
+    '~/assets/styles/global.css',
+    '~/assets/styles/overrides.css',
+    '~/assets/styles/transitions.css',
+    '~/assets/styles/typography.css',
+    '~/assets/styles/utils.css',
+  ],
+  plugins: [
+    '~/plugins/pinia-persistedstate.client',
+  ],
+  buildModules: [
+    '@pinia/nuxt',
+  ],
+  build: {
+    postcss: {
+      postcssOptions: {
+        plugins: {
+          tailwindcss: {},
+          autoprefixer: {},
+        },
+      },
+    },
+  },
 })
