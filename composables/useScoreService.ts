@@ -1,5 +1,5 @@
 import axios from 'axios'
-import IconService, { HttpProvider } from 'icon-sdk-js'
+import IconService from 'icon-sdk-js'
 import type TransactionResult from 'icon-sdk-js/build/data/Formatter/TransactionResult'
 
 export type TxResult = {
@@ -24,7 +24,7 @@ export const useScoreService = () => {
     ? 'https://sejong.net.solidwallet.io/'
     : 'https://ctz.solidwallet.io/'
 
-  const service = new IconService(new HttpProvider(`${url}api/v3`))
+  const service = new IconService(new IconService.HttpProvider(`${url}api/v3`))
 
   const SCORECallReadOnly = async (method: string, params?: unknown): Promise<string> => {
     try {
