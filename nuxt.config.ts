@@ -44,6 +44,7 @@ export default defineNuxtConfig({
       },
     },
   },
+  builder: 'webpack',
   // vite: {
   //   plugins: [
   //     // commonjs(),
