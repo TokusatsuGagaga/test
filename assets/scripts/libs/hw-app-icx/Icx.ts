@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 /********************************************************************************
  *   Ledger JS API for ICON
  *   (c) 2018 ICON Foundation
@@ -20,7 +18,7 @@
 
 // FIXME drop:
 import { splitPath, foreach, hexToBase64 } from "./utils";
-import type Transport from "@ledgerhq/hw-transport";
+import type Transport from "@/assets/scripts/libs/@ledgerhq/hw-transport/Transport";
 
 /**
  * ICON API

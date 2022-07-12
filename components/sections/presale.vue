@@ -107,7 +107,7 @@ const { collection } = useRuntimeConfig()
 
 const { emit, events } = useEventsBus()
 const { notify } = useNotificationToast()
-// const { SCORECallReadOnly } = useScoreService()
+const { SCORECallReadOnly } = useScoreService()
 const { images } = storeToRefs(useImagesStore())
 const { isLoggedIn, address } = storeToRefs(useUserStore())
 
@@ -134,18 +134,18 @@ const currentImage = computed<string>(() => images.value.unrevealed)
 
 const checkPresale = async (): Promise<void> => {
   try {
-    // isLive.value = await SCORECallReadOnly('presaleOpened') !== '0x0'
+    isLive.value = await SCORECallReadOnly('presaleOpened') !== '0x0'
 
     if (isLive.value) {
-      // remainingMintable.value = totalMintable.value - parseInt(await SCORECallReadOnly('presaleId'), 16)
-      // progress.value = (remainingMintable.value / totalMintable.value) * 100
-      // price.value = parseInt(await SCORECallReadOnly('presalePrice'), 16) / (10 ** 18)
-      // mintLimit.value = parseInt(await SCORECallReadOnly('mintLimit'), 16)
+      remainingMintable.value = totalMintable.value - parseInt(await SCORECallReadOnly('presaleId'), 16)
+      progress.value = (remainingMintable.value / totalMintable.value) * 100
+      price.value = parseInt(await SCORECallReadOnly('presalePrice'), 16) / (10 ** 18)
+      mintLimit.value = parseInt(await SCORECallReadOnly('mintLimit'), 16)
 
       if (isLoggedIn.value) {
-        // isWhitelistEnabled.value = await SCORECallReadOnly('requireWhitelist') !== '0x0'
-        // isWhitelisted.value = await SCORECallReadOnly('isWhitelisted', { _address: address.value }) !== '0x0'
-        // userMintCount.value = parseInt(await SCORECallReadOnly('mintCount', { _address: address.value }), 16)
+        isWhitelistEnabled.value = await SCORECallReadOnly('requireWhitelist') !== '0x0'
+        isWhitelisted.value = await SCORECallReadOnly('isWhitelisted', { _address: address.value }) !== '0x0'
+        userMintCount.value = parseInt(await SCORECallReadOnly('mintCount', { _address: address.value }), 16)
       }
     }
   } catch (error) {
