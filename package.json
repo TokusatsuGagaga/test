@@ -35,7 +35,7 @@
     "axios": "^0.27.2",
     "bignumber.js": "^9.0.2",
     "buffer": "^6.0.3",
-    "icon-sdk-js": "^1.2.3",
+    "icon-sdk-js": "^0.0.18",
     "js-sha3": "^0.8.0",
     "nuxt": "3.0.0-rc.3",
     "pinia": "^2.0.14",
