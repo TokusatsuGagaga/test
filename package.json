@@ -54,6 +54,7 @@
     "@nuxt/types": "^2.15.8",
     "@nuxt/webpack-builder": "^3.0.0-rc.4",
     "@nuxtjs/eslint-config": "^2.0.0",
+    "@originjs/vite-plugin-commonjs": "^1.0.3",
     "@pinia/nuxt": "^0.1.9",
     "@rollup/plugin-commonjs": "^22.0.1",
     "@rollup/plugin-inject": "^4.0.4",

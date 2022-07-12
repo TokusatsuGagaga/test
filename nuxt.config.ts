@@ -1,6 +1,7 @@
 import { defineNuxtConfig } from 'nuxt'
 import inject from '@rollup/plugin-inject'
-import commonjs from '@rollup/plugin-commonjs'
+// import commonjs from '@rollup/plugin-commonjs'
+import { esbuildCommonjs } from '@originjs/vite-plugin-commonjs'
 
 export default defineNuxtConfig({
   publicRuntimeConfig: {
@@ -47,7 +48,7 @@ export default defineNuxtConfig({
   // builder: 'webpack',
   vite: {
     plugins: [
-      commonjs(),
+      // commonjs(),
       inject({
         Buffer: ['buffer', 'Buffer'],
       }),
@@ -56,6 +57,11 @@ export default defineNuxtConfig({
       include: [
         'buffer',
       ],
+      esbuildOptions: {
+        plugins: [
+          esbuildCommonjs(['@ledgerhq/hw-transport-webhid']),
+        ],
+      },
     },
   },
 })
