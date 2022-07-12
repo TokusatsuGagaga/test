@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 
 import axios from 'axios'
 import TransportWebHID from '@/assets/scripts/libs/@ledgerhq/hw-transport-webhid/TransportWebHID'
-import IconService from 'icon-sdk-js'
+import IconService, { HttpProvider } from 'icon-sdk-js'
 import Icx from '@/assets/scripts/libs/hw-app-icx/Icx'
 
 import { useUserStore } from '@/stores/user'
@@ -11,7 +11,6 @@ const { iconNetwork } = useRuntimeConfig()
 const isTestnet = iconNetwork === 'testnet'
 const url = isTestnet ? 'https://sejong.net.solidwallet.io/' : 'https://ctz.solidwallet.io/'
 const nid = isTestnet ? '53' : '1'
-const { HttpProvider } = IconService
 const provider = new HttpProvider(`${url}api/v3`)
 const iconService = new IconService(provider)
 
