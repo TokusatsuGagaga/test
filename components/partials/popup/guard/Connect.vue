@@ -8,7 +8,7 @@
         name="fade-bounce"
         mode="out-in"
       >
-        <div
+        <!-- <div
           v-if="currentStep === LOGIN_STEPS.PICK"
           :key="LOGIN_STEPS.PICK"
           class="grid gap-10"
@@ -100,7 +100,7 @@
               {{ ledgerStatus.error }}
             </div>
           </transition>
-        </div>
+        </div> -->
       </transition>
     </template>
   </PartialsPopup>
@@ -109,15 +109,15 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
 import { useDeviceStore } from '@/stores/device'
-import { useLedgerStore } from '@/stores/ledger'
+// import { useLedgerStore } from '@/stores/ledger'
 
 const { collection } = useRuntimeConfig()
 
 const isNonDesktopWarned = useState<boolean>('isNonDesktopWarned', () => false)
 
-const ledgerStore = useLedgerStore()
-const { selectLedgerAddress, setLedgerPage } = ledgerStore
-const { ledgerAddresses, ledgerStatus } = storeToRefs(ledgerStore)
+// const ledgerStore = useLedgerStore()
+// const { selectLedgerAddress, setLedgerPage } = ledgerStore
+// const { ledgerAddresses, ledgerStatus } = storeToRefs(ledgerStore)
 const { browser, device } = useDeviceStore()
 
 const { bus, events } = useEventsBus()
@@ -183,7 +183,7 @@ const connectIconex = (): void => {
 }
 
 const connectLedger = (): void => {
-  setLedgerPage(0)
+  // setLedgerPage(0)
 }
 
 const connectWallet = (id: WALLET_IDS): void => {
