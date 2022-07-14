@@ -5,7 +5,7 @@
   >
     <Container class="grid">
       <div
-        class="grid gap-24 content-start justify-self-center self-center w-full p-20 bg-white rounded-15"
+        class="grid gap-24 content-start justify-self-center self-center w-full p-20 bg-white rounded-15 transition-width duration-200"
         :class="{
           's:w-256': size === 's',
           's:w-320': size === 'm',

@@ -19,6 +19,11 @@ const icons = {
   'Logo/Twitter': markRaw(defineAsyncComponent(() => import('@/assets/scripts/icons/Logo/Twitter.vue'))),
   'Math/Minus': markRaw(defineAsyncComponent(() => import('@/assets/scripts/icons/Math/Minus.vue'))),
   'Math/Plus': markRaw(defineAsyncComponent(() => import('@/assets/scripts/icons/Math/Plus.vue'))),
+  'Notification/Error': markRaw(defineAsyncComponent(() => import('@/assets/scripts/icons/Notification/Error.vue'))),
+  'Notification/Info': markRaw(defineAsyncComponent(() => import('@/assets/scripts/icons/Notification/Info.vue'))),
+  'Notification/Neutral': markRaw(defineAsyncComponent(() => import('@/assets/scripts/icons/Notification/Neutral.vue'))),
+  'Notification/Success': markRaw(defineAsyncComponent(() => import('@/assets/scripts/icons/Notification/Success.vue'))),
+  'Notification/Warning': markRaw(defineAsyncComponent(() => import('@/assets/scripts/icons/Notification/Warning.vue'))),
 }
 
 export type IconsNames = keyof typeof icons
