@@ -170,14 +170,21 @@ export const useLedgerStore = defineStore('ledger-store', () => {
   }
   const getLedgerAddresses = async (page: number): Promise<LedgerAddressesList> => {
     try {
+      console.log('ITEMS_PER_PAGE:', ITEMS_PER_PAGE)
       const transport = await TransportWebUSB.create()
+      console.log('transport:', transport)
       const icx = new Icx(transport)
+      console.log('icx:', icx)
 
       const ledgerBook: LedgerAddressesList = await Promise.all([...new Array(ITEMS_PER_PAGE)].map(async (_, index) => {
         const id = ITEMS_PER_PAGE * page + index
+        console.log('id:', id)
         const { address } = await icx.getAddress(`44'/4801368'/0'/0'/${id}'`)
+        console.log('address:', address)
         const result = await iconService.getBalance(String(address)).execute()
+        console.log('result:', result)
         const balance = IconService.IconConverter.toNumber(result) / 10 ** 18
+        console.log('balance:', balance)
         return {
           id,
           address: String(address),
@@ -224,10 +231,14 @@ export const useLedgerStore = defineStore('ledger-store', () => {
         ledgerStatus.currentPage = page
       })
       .catch((error) => {
-        ledgerStatus.error = error
+        const stringError = String(error)
+        let message = stringError
+        if (stringError.includes('TransportOpenUserCancelled')) message = 'Ledger connection canceled.'
+        else if (stringError.includes('TransportError')) message = 'Something wrong happened. Please retry later.'
+        ledgerStatus.error = message
         notify.error({
           title: 'Error',
-          message: error,
+          message,
           timeout: 5000,
         })
       })
