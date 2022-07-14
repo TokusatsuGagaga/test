@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 
 import axios from 'axios'
-import TransportWebUSB from '@ledgerhq/hw-transport-webusb'
+import TransportWebHID from '@ledgerhq/hw-transport-webhid'
 import IconService from 'icon-sdk-js'
 import Icx from '@/assets/scripts/libs/hw-app-icx/Icx'
 
@@ -85,7 +85,7 @@ export const useLedgerStore = defineStore('ledger-store', () => {
         stepLimit,
         timestamp,
       } = payload.params
-      const transport = await TransportWebUSB.create()
+      const transport = await TransportWebHID.create()
       const icx = new Icx(transport)
       const storePath = addressPath.value
       const serialized = serialize([
@@ -121,7 +121,7 @@ export const useLedgerStore = defineStore('ledger-store', () => {
   }
   const HANDLE_LEDGER_SIGN = async (payload: { hash: string, from: string }) => {
     try {
-      const transport = await TransportWebUSB.create()
+      const transport = await TransportWebHID.create()
       const icx = new Icx(transport)
       const storePath = addressPath.value
       const serialized = serialize([
@@ -171,11 +171,94 @@ export const useLedgerStore = defineStore('ledger-store', () => {
   const getLedgerAddresses = async (page: number): Promise<LedgerAddressesList> => {
     try {
       console.log('ITEMS_PER_PAGE:', ITEMS_PER_PAGE)
-      const transport = await TransportWebUSB.create()
+      const transport = await TransportWebHID.create()
       console.log('transport:', transport)
       const icx = new Icx(transport)
       console.log('icx:', icx)
 
+      let iiiiiddddd
+
+      iiiiiddddd = 0
+      try {
+        console.log('start test')
+        const id = iiiiiddddd
+        console.log('id:', id)
+        const { address } = await icx.getAddress(`44'/4801368'/0'/0'/${id}'`)
+        console.log('address:', address)
+        const result = await iconService.getBalance(String(address)).execute()
+        console.log('result:', result)
+        const balance = IconService.IconConverter.toNumber(result) / 10 ** 18
+        console.log('balance:', balance)
+        console.log('end test')
+      } catch (error) {
+        console.error(`something went wrong with id ${iiiiiddddd}`)
+      }
+
+      iiiiiddddd = 1
+      try {
+        console.log('start test')
+        const id = iiiiiddddd
+        console.log('id:', id)
+        const { address } = await icx.getAddress(`44'/4801368'/0'/0'/${id}'`)
+        console.log('address:', address)
+        const result = await iconService.getBalance(String(address)).execute()
+        console.log('result:', result)
+        const balance = IconService.IconConverter.toNumber(result) / 10 ** 18
+        console.log('balance:', balance)
+        console.log('end test')
+      } catch (error) {
+        console.error(`something went wrong with id ${iiiiiddddd}`)
+      }
+
+      iiiiiddddd = 2
+      try {
+        console.log('start test')
+        const id = iiiiiddddd
+        console.log('id:', id)
+        const { address } = await icx.getAddress(`44'/4801368'/0'/0'/${id}'`)
+        console.log('address:', address)
+        const result = await iconService.getBalance(String(address)).execute()
+        console.log('result:', result)
+        const balance = IconService.IconConverter.toNumber(result) / 10 ** 18
+        console.log('balance:', balance)
+        console.log('end test')
+      } catch (error) {
+        console.error(`something went wrong with id ${iiiiiddddd}`)
+      }
+
+      iiiiiddddd = 3
+      try {
+        console.log('start test')
+        const id = iiiiiddddd
+        console.log('id:', id)
+        const { address } = await icx.getAddress(`44'/4801368'/0'/0'/${id}'`)
+        console.log('address:', address)
+        const result = await iconService.getBalance(String(address)).execute()
+        console.log('result:', result)
+        const balance = IconService.IconConverter.toNumber(result) / 10 ** 18
+        console.log('balance:', balance)
+        console.log('end test')
+      } catch (error) {
+        console.error(`something went wrong with id ${iiiiiddddd}`)
+      }
+
+      iiiiiddddd = 4
+      try {
+        console.log('start test')
+        const id = iiiiiddddd
+        console.log('id:', id)
+        const { address } = await icx.getAddress(`44'/4801368'/0'/0'/${id}'`)
+        console.log('address:', address)
+        const result = await iconService.getBalance(String(address)).execute()
+        console.log('result:', result)
+        const balance = IconService.IconConverter.toNumber(result) / 10 ** 18
+        console.log('balance:', balance)
+        console.log('end test')
+      } catch (error) {
+        console.error(`something went wrong with id ${iiiiiddddd}`)
+      }
+
+      console.log('start ledgerBook')
       const ledgerBook: LedgerAddressesList = await Promise.all([...new Array(ITEMS_PER_PAGE)].map(async (_, index) => {
         const id = ITEMS_PER_PAGE * page + index
         console.log('id:', id)
@@ -193,6 +276,7 @@ export const useLedgerStore = defineStore('ledger-store', () => {
           isLoading: false,
         } as LedgerAddressData
       }))
+      console.log('end ledgerBook')
 
       return ledgerBook
     } catch (error) {
