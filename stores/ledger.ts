@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 
 import axios from 'axios'
-import TransportWebHID from '@ledgerhq/hw-transport-webhid'
+import TransportWebUSB from '@ledgerhq/hw-transport-webusb'
 import IconService from 'icon-sdk-js'
 import Icx from '@/assets/scripts/libs/hw-app-icx/Icx'
 
@@ -85,7 +85,7 @@ export const useLedgerStore = defineStore('ledger-store', () => {
         stepLimit,
         timestamp,
       } = payload.params
-      const transport = await TransportWebHID.create()
+      const transport = await TransportWebUSB.create()
       const icx = new Icx(transport)
       const storePath = addressPath.value
       const serialized = serialize([
@@ -121,7 +121,7 @@ export const useLedgerStore = defineStore('ledger-store', () => {
   }
   const HANDLE_LEDGER_SIGN = async (payload: { hash: string, from: string }) => {
     try {
-      const transport = await TransportWebHID.create()
+      const transport = await TransportWebUSB.create()
       const icx = new Icx(transport)
       const storePath = addressPath.value
       const serialized = serialize([
@@ -170,7 +170,7 @@ export const useLedgerStore = defineStore('ledger-store', () => {
   }
   const getLedgerAddresses = async (page: number): Promise<LedgerAddressesList> => {
     try {
-      const transport = await TransportWebHID.create()
+      const transport = await TransportWebUSB.create()
       const icx = new Icx(transport)
 
       const ledgerBook: LedgerAddressesList = await Promise.all([...new Array(ITEMS_PER_PAGE)].map(async (_, index) => {
