@@ -259,23 +259,43 @@ export const useLedgerStore = defineStore('ledger-store', () => {
       }
 
       console.log('start ledgerBook')
-      const ledgerBook: LedgerAddressesList = await Promise.all([...new Array(ITEMS_PER_PAGE)].map(async (_, index) => {
-        const id = ITEMS_PER_PAGE * page + index
-        console.log('id:', id)
-        const { address } = await icx.getAddress(`44'/4801368'/0'/0'/${id}'`)
+      // const ledgerBook: LedgerAddressesList = await Promise.all([...new Array(ITEMS_PER_PAGE)].map(async (_, index) => {
+      //   const id = ITEMS_PER_PAGE * page + index
+      //   console.log('id:', id)
+      //   const { address } = await icx.getAddress(`44'/4801368'/0'/0'/${id}'`)
+      //   console.log('address:', address)
+      //   const result = await iconService.getBalance(String(address)).execute()
+      //   console.log('result:', result)
+      //   const balance = IconService.IconConverter.toNumber(result) / 10 ** 18
+      //   console.log('balance:', balance)
+      //   return {
+      //     id,
+      //     address: String(address),
+      //     path: `44'/4801368'/0'/0'/${id}'`,
+      //     balance,
+      //     isLoading: false,
+      //   } as LedgerAddressData
+      // }))
+
+      const ledgerBook: LedgerAddressesList = []
+      for (let index = (ITEMS_PER_PAGE * page); index < ((ITEMS_PER_PAGE * page) + ITEMS_PER_PAGE); index++) {
+        console.log('id:', index)
+        // eslint-disable-next-line no-await-in-loop
+        const { address } = await icx.getAddress(`44'/4801368'/0'/0'/${index}'`)
         console.log('address:', address)
+        // eslint-disable-next-line no-await-in-loop
         const result = await iconService.getBalance(String(address)).execute()
         console.log('result:', result)
         const balance = IconService.IconConverter.toNumber(result) / 10 ** 18
         console.log('balance:', balance)
-        return {
-          id,
+        ledgerBook.push({
+          id: index,
           address: String(address),
-          path: `44'/4801368'/0'/0'/${id}'`,
+          path: `44'/4801368'/0'/0'/${index}'`,
           balance,
           isLoading: false,
-        } as LedgerAddressData
-      }))
+        })
+      }
       console.log('end ledgerBook')
 
       return ledgerBook
